@@ -1,4 +1,5 @@
 import { Client, Intents } from "discord.js";
+import 'dotenv/config';
 const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 
 client.once('ready', () =>{
@@ -11,4 +12,4 @@ client.on('messageCreate', m =>{
     }
 });
 
-client.login('Nzk2NTY5MDYzMDUyNDEwOTUw.X_Z0wA.fTRhzLTOMPTK_xHbvzPis2QjEgw');
+client.login(process.env.CLIENT_TOKEN);
