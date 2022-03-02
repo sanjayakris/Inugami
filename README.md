@@ -1,2 +1,2 @@
 # Inugami
-a Discord Bot made for my personal server
+A Discord bot made for my personal server
