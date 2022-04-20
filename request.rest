@@ -1,1 +1,10 @@
-GET http://localhost:5600/
+GET http://localhost:5600/log
+
+###
+POST http://localhost:5600/activity
+Content-Type: application/json
+
+{
+    "name": "Nekopoi",
+    "type": "PLAYING"
+}

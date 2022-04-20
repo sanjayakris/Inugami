@@ -3,12 +3,29 @@ import express from "express";
 import cors from "cors";
 import 'dotenv/config';
 import router from "./routes/index.js";
+import db from "./config/database.js";
+import Info from "./models/InfoModel.js";
 export const client = new Client({ intents: ["DIRECT_MESSAGES", "GUILD_MESSAGES", "GUILDS", "GUILD_PRESENCES"] });
 const app = express();
 
+try {
+    db.authenticate();
+    console.log("Database successfully connected");
+} catch (error) {
+    throw error;
+}
+
+app.use(cors());
+app.use(express.json());
 app.use(router);
 
-client.once('ready', () =>{
+client.once('ready', async () =>{
+    const guild = client.guilds.cache.get("750736254676762725");
+    const botAsGuildMember = guild.members.cache.get("796569063052410950");
+    const infoData = await Info.findAll();
+    const { nickname, activity_type, activity_name } = infoData[0];
+    botAsGuildMember.setNickname(nickname);
+    client.user.setActivity(`${activity_name}`, { type: `${activity_type}` });
     console.log("Bot is running...");
 });
 

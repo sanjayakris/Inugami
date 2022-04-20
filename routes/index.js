@@ -1,8 +1,11 @@
 import express from "express";
 import { client } from "../app.js"
-import { getClientData } from "../controllers/Client.js";
+import { getClientData, setClientActivity, postTest, setNickname } from "../controllers/Client.js";
 const router = express.Router();
 
-router.get('/', getClientData);
+router.get('/log', getClientData);
+router.post('/log', postTest)
+router.post('/activity', setClientActivity);
+router.post('/nickname', setNickname);
 
 export default router;
